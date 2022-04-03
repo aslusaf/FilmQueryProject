@@ -334,6 +334,16 @@ public class MenuBuilder {
 	public int getNumberOfOptions() {
 		return numberOfOptions;
 	}
+	
+	public void printBreakBar() {
+
+		this.breakBarSize = 59;
+		System.out.print("  ");
+		for (int i = 0; i < breakBarSize; i++)
+			System.out.print("\u2500");
+		System.out.println("\n");
+
+	}
 
 	public void printBreakBar(String size) {
 

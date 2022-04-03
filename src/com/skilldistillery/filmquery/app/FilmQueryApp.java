@@ -51,7 +51,9 @@ public class FilmQueryApp {
 				kb.nextLine();
 				runOption(option, kb, mb);
 			} catch (Exception e) {
-				System.out.println("\n Invalid menu option.\n");
+				System.out.println();
+				mb.printBanner("***** Invalid Menu Option *****");
+				mb.printBreakBar();
 				kb.nextLine();
 				option = 0;
 			}
@@ -65,20 +67,30 @@ public class FilmQueryApp {
 		switch (option) {
 
 		case 1:
-			System.out.println();
-			mb.printBreakBar("M");
-			mb.printBanner("Enter the film id:");
-			mb.printDefaultInputPromptCharacter();
-			int filmId = kb.nextInt();
-			kb.nextLine();
-			System.out.println();
-			mb.printBreakBar("M");
-			System.out.println(db.findFilmById(filmId));
-			mb.printBreakBar("M");
+			do {
+				try {
+					System.out.println();
+					mb.printBreakBar();
+					mb.printBanner("Enter the film id:");
+					mb.printDefaultInputPromptCharacter();
+					int filmId = kb.nextInt();
+					kb.nextLine();
+					System.out.println();
+					mb.printBreakBar();
+					System.out.println(db.findFilmById(filmId));
+					mb.printBreakBar();
+					break;
+				} catch (Exception e) {
+					System.out.println();
+					mb.printBanner("***** Invalid entry. Please enter a valid film ID. *****");
+					kb.nextLine();
+				}
+			} while (true);
 			break;
+
 		case 2:
 			System.out.println();
-			mb.printBreakBar("M");
+			mb.printBreakBar();
 			mb.printBanner("Enter the keyword:");
 			mb.printDefaultInputPromptCharacter();
 			String keyword = kb.next();
@@ -95,13 +107,17 @@ public class FilmQueryApp {
 				mb.printBanner("No matching films were found");
 				System.out.println();
 			}
-			mb.printBreakBar("M");
+			mb.printBreakBar();
 			break;
 		case 3:
-			System.out.println("Goodbye!");
+			System.out.println();
+			mb.printBreakBar();
+			mb.printBanner("Goodbye!");
 			break;
 		default:
-			System.out.println("\n Invalid menu option\n");
+			System.out.println();
+			mb.printBanner("***** Invalid Menu Option *****");
+			mb.printBreakBar();
 		}
 
 	}
