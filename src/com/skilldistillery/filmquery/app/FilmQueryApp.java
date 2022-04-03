@@ -29,44 +29,81 @@ public class FilmQueryApp {
 	}
 
 	private void launch() {
-		Scanner input = new Scanner(System.in);
+		Scanner kb = new Scanner(System.in);
 
-		startUserInterface(input);
+		startUserInterface(kb);
 
-		input.close();
+		kb.close();
 	}
 
-	private void startUserInterface(Scanner input) {
+	private void startUserInterface(Scanner kb) {
 
 		MenuBuilder mb = new MenuBuilder("Film Query Menu");
 		mb.addBannerWrapper(1);
 		mb.addMenuOptions("Look up a film by the film ID", "Look up a film by a search keyword",
 				"Exit the application");
 
-		// TODO wrap in try/catch and while loop
 		int option;
 		do {
 			mb.printMenu();
-			option = input.nextInt();
-			input.nextLine();
-			runOption(option);
-			
+			try {
+				option = kb.nextInt();
+				kb.nextLine();
+				runOption(option, kb, mb);
+			} catch (Exception e) {
+				System.out.println("\n Invalid menu option.\n");
+				kb.nextLine();
+				option = 0;
+			}
+
 		} while (option != 3);
 
 	}
 
-	private void runOption(int option) {
-		
+	private void runOption(int option, Scanner kb, MenuBuilder mb) {
+
 		switch (option) {
-		
+
 		case 1:
-			System.out.println("In case 1");
+			System.out.println();
+			mb.printBreakBar("M");
+			mb.printBanner("Enter the film id:");
+			mb.printDefaultInputPromptCharacter();
+			int filmId = kb.nextInt();
+			kb.nextLine();
+			System.out.println();
+			mb.printBreakBar("M");
+			System.out.println(db.findFilmById(filmId));
+			mb.printBreakBar("M");
 			break;
 		case 2:
-			System.out.println("In case 2");
+			System.out.println();
+			mb.printBreakBar("M");
+			mb.printBanner("Enter the keyword:");
+			mb.printDefaultInputPromptCharacter();
+			String keyword = kb.next();
+			kb.nextLine();
+			System.out.println();
+			mb.printBreakBar("M");
+			List<Film> filmList = db.findFilmByKeyword(keyword);
+			if (!filmList.isEmpty()) {
+				for (Film film : filmList) {
+					System.out.println(film);
+					mb.printBreakBar("L");
+				}
+			} else {
+				mb.printBanner("No matching films were found");
+				System.out.println();
+			}
+			mb.printBreakBar("M");
 			break;
+		case 3:
+			System.out.println("Goodbye!");
+			break;
+		default:
+			System.out.println("\n Invalid menu option\n");
 		}
-		
+
 	}
 
 }

@@ -128,6 +128,10 @@ public class MenuBuilder {
 		ptwo.printMenu();
 
 	}
+	
+	public void printDefaultInputPromptCharacter() {
+		System.out.print("  \u21f6 ");
+	}
 
 	public void changeInputPromptCharacter(String inputPromptCharacter) {
 		this.inputPromptCharacter = inputPromptCharacter;
