@@ -1,7 +1,7 @@
 ### Film Query Project
 
 #### Description:
-This is a program that allows the user use a Java-based CLI to query a back-end database for information pertaining to films.
+This is a program that allows the user to use a Java-based CLI to query a back-end database for information pertaining to films.
 
 #### Instructions:
 
